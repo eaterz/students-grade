@@ -33,5 +33,10 @@ class DbConnect{
         $stmt->execute($params);
         return $stmt;
     }
+
+    public function getConnection() {
+        return $this->dbconn; // Where $this->conn is your PDO connection
+    }
+
 }
  

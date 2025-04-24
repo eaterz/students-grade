@@ -26,7 +26,7 @@
                     } else if (Validator::Role('teacher')) {
                         ?>
                         <a href="/dashboard" class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-200">Dashboard</a>
-                        <a href="/student" class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-200">Students</a>
+                        <a href="/students" class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-200">Students</a>
                         <a href="/subjects" class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-200">Subjects</a>
                         <a href="/grades" class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-indigo-50 hover:text-indigo-700 transition-colors duration-200">Grades</a>
                         <a href="/logout" class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-red-50 hover:text-red-700 transition-colors duration-200">Logout</a>
