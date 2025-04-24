@@ -3,7 +3,7 @@ require "session.php";
 
 require "Controller/AuthController.php";
 require "Controller/DashboardController.php";
-
+require "Controller/AddStudentsController.php";
 
 
 require "Router.php";
@@ -21,6 +21,9 @@ $router->post('/login/process', [AuthController::class, 'processLogin']);
 $router->get('/logout', [AuthController::class, 'logout']);
 
 $router->get('/dashboard', [DashboardController::class, 'dashboard']);
+
+//add student
+$router->get('/student', [AddStudentsController::class, 'index']);
 
 
 
