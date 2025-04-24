@@ -23,7 +23,11 @@ $router->get('/logout', [AuthController::class, 'logout']);
 $router->get('/dashboard', [DashboardController::class, 'dashboard']);
 
 //add student
-$router->get('/student', [AddStudentsController::class, 'index']);
+$router->get('/students', [AddStudentsController::class, 'index']);
+$router->get('/students/create', [AddStudentsController::class, 'create']);
+$router->post('/students/create/store', [AddStudentsController::class, 'store']);
+$router->post('/students/delete', [AddStudentsController::class, 'destroy']);
+
 
 
 
