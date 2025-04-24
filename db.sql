@@ -4,7 +4,7 @@ USE students_grade;
 
 CREATE TABLE user(
     id int primary key auto_increment,
-    personal_code integer(11) NOT NULL,
+    personal_code varchar(12) NOT NULL,
     password varchar(255) NOT NULL,
     first_name varchar(255) NOT NULL,
     last_name varchar(255) NOT NULL,
@@ -19,10 +19,10 @@ CREATE TABLE subject(
 
 CREATE TABLE grades(
     id int primary key auto_increment,
-    student_id int NOT NULL,
+    user_id int NOT NULL,
     subject_id int NOT NULL,
     grade int NOT NULL,
-    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (subject_id) REFERENCES subject(id),
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -59,7 +59,7 @@ INSERT INTO subject (subject_name) VALUES
 
 -- Insert sample grades for specific students in various subjects
 
-INSERT INTO grades (student_id, subject_id, grade) VALUES
+INSERT INTO grades (user_id, subject_id, grade) VALUES
     (3, 1, 9),  -- Emily Smith - Mathematics
     (3, 2, 7),  -- Emily Smith - Science
     (4, 1, 8),  -- Liam Johnson - Mathematics
@@ -78,6 +78,8 @@ INSERT INTO grades (student_id, subject_id, grade) VALUES
     (14, 2, 10),-- Charlotte Wilson - Science
     (15, 3, 7), -- Amelia Anderson - English
     (16, 4, 6); -- Evelyn Thomas - History
+
+
 
 
 
