@@ -4,7 +4,6 @@ require "session.php";
 require "Controller/AuthController.php";
 require "Controller/DashboardController.php";
 
-require "Controller/AdminController.php";
 
 
 require "Router.php";
@@ -24,11 +23,6 @@ $router->get('/logout', [AuthController::class, 'logout']);
 $router->get('/dashboard', [DashboardController::class, 'dashboard']);
 
 
-
-$router->post('/admin/save', [AdminController::class, 'saveUser']);
-
-
-$router->get('/admin', [AdminController::class, 'show']);
 
 
 
