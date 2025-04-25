@@ -38,4 +38,19 @@ public function store()
     header('Location: /subjects');
     exit;
 }
+
+public function delete()
+{
+    $subjectId = intval($_POST['subject_id'] ?? 0); // Get the subject ID from the POST request
+    if ($subjectId <= 0) {
+        die('Invalid subject ID.');
+    }
+
+    $this->subjectModel->delete($subjectId);
+
+    // Redirect to the subjects list
+    header('Location: /subjects');
+    exit;
+}
+
 }
