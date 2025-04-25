@@ -7,7 +7,7 @@ class AddStudentsController
     public function index()
     {
         if (!Validator::Role('teacher')) {
-            header("Location: /login");
+            header("Location: /");
             exit();
         }
         include './view/teacher/AddStudents/index.view.php';
@@ -16,7 +16,7 @@ class AddStudentsController
     public function create()
     {
         if (!Validator::Role('teacher')) {
-            header("Location: /login");
+            header("Location: /");
             exit();
         }
         include './view/teacher/AddStudents/create.view.php';
@@ -25,7 +25,7 @@ class AddStudentsController
     public function store() {
 
         if (!Validator::Role('teacher')) {
-            header("Location: /login");
+            header("Location: /");
             exit();
         }
 
@@ -68,7 +68,7 @@ class AddStudentsController
     public function edit()
     {
         if (!Validator::Role('teacher')) {
-            header("Location: /login");
+            header("Location: /");
             exit();
         }
         include './view/teacher/AddStudents/edit.view.php';
@@ -108,7 +108,7 @@ class AddStudentsController
     public function destroy()
     {
         if (!Validator::Role('teacher')) {
-            header("Location: /login");
+            header("Location: /");
             exit();
         }
 
