@@ -65,6 +65,46 @@ class AddStudentsController
         exit;
     }
 
+    public function edit()
+    {
+        if (!Validator::Role('teacher')) {
+            header("Location: /login");
+            exit();
+        }
+        include './view/teacher/AddStudents/edit.view.php';
+    }
+
+    public function update()
+    {
+        $id = $_GET['id'] ?? 0;
+        $firstName = $_POST['first_name'] ?? '';
+        $lastName = $_POST['last_name'] ?? '';
+        $personalCode = $_POST['personal_code'] ?? '';
+
+        $studentModel = new StudentsModel();
+
+        if (empty($firstName) || empty($lastName) || empty($personalCode)) {
+            $_SESSION['error_message'] = 'All fields are required';
+            header("Location: /students/edit?id=$id");
+            exit;
+        }
+
+        $result = $studentModel->updateUser($id, [
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'personal_code' => $personalCode
+        ]);
+
+        if ($result) {
+            $_SESSION['success_message'] = 'Student updated successfully';
+        } else {
+            $_SESSION['error_message'] = 'Failed to update student';
+        }
+
+        header('Location: /students');
+        exit;
+    }
+
     public function destroy()
     {
         if (!Validator::Role('teacher')) {

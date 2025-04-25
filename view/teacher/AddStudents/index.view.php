@@ -7,8 +7,6 @@ $dashboardModel = new TeacherModel();
 $students = $dashboardModel->getAllUsers();
 ?>
 
-    <!-- Make sure to include Tailwind CSS in your head.php file -->
-    <!-- Example: <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
 
     <div class="bg-gray-50 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -140,7 +138,7 @@ $students = $dashboardModel->getAllUsers();
     </div>
 
     <script>
-        // Fix for the bootstrap error by implementing our own modal functionality
+
         function setDeleteId(studentId) {
             document.getElementById('deleteStudentId').value = studentId;
             document.getElementById('deleteModal').classList.remove('hidden');
@@ -150,7 +148,7 @@ $students = $dashboardModel->getAllUsers();
             document.getElementById('deleteModal').classList.add('hidden');
         }
 
-        // Close the modal when clicking on the background
+
         document.addEventListener('DOMContentLoaded', function() {
             var modal = document.getElementById('deleteModal');
 
@@ -160,7 +158,7 @@ $students = $dashboardModel->getAllUsers();
                 }
             });
 
-            // Close modal with ESC key
+
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
                     closeModal();

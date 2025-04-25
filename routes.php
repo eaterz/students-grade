@@ -26,6 +26,8 @@ $router->get('/dashboard', [DashboardController::class, 'dashboard']);
 $router->get('/students', [AddStudentsController::class, 'index']);
 $router->get('/students/create', [AddStudentsController::class, 'create']);
 $router->post('/students/create/store', [AddStudentsController::class, 'store']);
+$router->get('/students/edit', [AddStudentsController::class, 'edit']);
+$router->post('/students/edit', [AddStudentsController::class, 'update']);
 $router->post('/students/delete', [AddStudentsController::class, 'destroy']);
 
 
