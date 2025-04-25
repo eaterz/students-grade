@@ -50,6 +50,40 @@ class StudentsModel extends Model
         return (int)$stmt->fetchColumn() > 0;
     }
 
+    public function getUserById($id) {
+        $sql = "SELECT id, personal_code, first_name, last_name, role FROM user WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $user ?: null;
+    }
+
+
+    public function updateUser($id, $data) {
+        try {
+            $sql = "UPDATE user SET 
+                first_name = :first_name,
+                last_name = :last_name,
+                personal_code = :personal_code
+                WHERE id = :id";
+
+            $stmt = $this->db->prepare($sql);
+
+            $params = [
+                ':first_name' => $data['first_name'],
+                ':last_name' => $data['last_name'],
+                ':personal_code' => $data['personal_code'],
+                ':id' => $id
+            ];
+
+            return $stmt->execute($params);
+        } catch (PDOException $e) {
+            // Log error or handle exception
+            return false;
+        }
+    }
+
 
 
 

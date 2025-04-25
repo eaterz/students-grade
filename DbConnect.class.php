@@ -38,5 +38,16 @@ class DbConnect{
         return $this->dbconn; // Where $this->conn is your PDO connection
     }
 
+    public function prepare(string $sql)
+    {
+        try {
+            return $this->dbconn->prepare($sql);
+        } catch (PDOException $e) {
+            // Log error
+            error_log('Database prepare error: ' . $e->getMessage());
+            return false;
+        }
+    }
+
 }
  
