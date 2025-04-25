@@ -30,5 +30,5 @@ $router->post('/students/delete', [AddStudentsController::class, 'destroy']);
 $router->get('/subjects', [AddSubjectController::class, 'index']); // Display all subjects
 $router->get('/subjects/create', [AddSubjectController::class, 'create']); // Show the form
 $router->post('/subjects/store', [AddSubjectController::class, 'store']); // Handle form submission
-
+$router->post('/subjects/delete', [AddSubjectController::class, 'delete']); // Handle subject deletion
 $router->route($url, $method);
