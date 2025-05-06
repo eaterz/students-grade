@@ -24,11 +24,12 @@ $students = $dashboardModel->getAllUsers();
             <!-- Students Table Card -->
             <div class="bg-white overflow-hidden shadow-md rounded-lg">
                 <!-- Table -->
+                <?php $nr = 1;?>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nr.</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Personal Code</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
@@ -41,7 +42,7 @@ $students = $dashboardModel->getAllUsers();
                             <?php foreach ($students as $student): ?>
                                 <?php if ($student['role'] == 'student'): ?>
                                     <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?php echo $student['id']; ?></td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?php echo $nr++; ?></td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo $student['personal_code']; ?></td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $student['first_name']; ?></td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><?php echo $student['last_name']; ?></td>
