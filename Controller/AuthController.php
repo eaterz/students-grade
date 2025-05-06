@@ -51,7 +51,7 @@ class AuthController
                 if ($password !== $storedPassword) {
                     $errors[] = "Password is incorrect.";
                 }
-
+                
             }
 
             if (empty($errors)) {

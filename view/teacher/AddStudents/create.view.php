@@ -39,7 +39,7 @@
                                 <label for="personal_code" class="block text-sm font-medium text-gray-700">Personal Code</label>
                                 <div class="mt-1">
                                     <input type="text" name="personal_code" id="personal_code" maxlength="12" required
-                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm bg-gray-100 rounded-md">
                                 </div>
                             </div>
 
@@ -48,7 +48,7 @@
                                 <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
                                 <div class="mt-1">
                                     <input type="text" name="first_name" id="first_name" required
-                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm bg-gray-100 rounded-md">
                                 </div>
                             </div>
 
@@ -57,7 +57,7 @@
                                 <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
                                 <div class="mt-1">
                                     <input type="text" name="last_name" id="last_name" required
-                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm  bg-gray-100 rounded-md">
                                 </div>
                             </div>
 
@@ -66,7 +66,7 @@
                                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                                 <div class="mt-1">
                                     <input type="password" name="password" id="password" required
-                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm  bg-gray-100 rounded-md">
                                 </div>
                             </div>
 
@@ -75,7 +75,7 @@
                                 <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
                                 <div class="mt-1">
                                     <input type="password" name="password_confirmation" id="password_confirmation"
-                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                           class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm  bg-gray-100 rounded-md">
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="mt-8 flex justify-end">
-                            <a href="/students" class="mr-3 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <a href="/students" class="mr-3 px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Cancel
                             </a>
                             <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
