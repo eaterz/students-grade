@@ -4,6 +4,7 @@ require "session.php";
 require "Controller/AuthController.php";
 require "Controller/DashboardController.php";
 require "Controller/AddStudentsController.php";
+require "Controller/AddGradesController.php";
 require "Controller/AddSubjectController.php"; // Include the AddSubjectController
 require "Router.php";
 
@@ -25,6 +26,11 @@ $router->post('/students/create/store', [AddStudentsController::class, 'store'])
 $router->get('/students/edit', [AddStudentsController::class, 'edit']);
 $router->post('/students/edit', [AddStudentsController::class, 'update']);
 $router->post('/students/delete', [AddStudentsController::class, 'destroy']);
+
+//Add Grades
+$router->get('/grades', [AddGradesController::class, 'create']);
+$router->post('/grades/add', [AddGradesController::class, 'store']);
+
 
 // Add subject routes
 $router->get('/subjects', [AddSubjectController::class, 'index']); // Display all subjects

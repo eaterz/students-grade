@@ -5,18 +5,18 @@
 <?php
 $dashboardModel = new DashboardModel();
 
-// Get user data from the existing session
+
 $currentUser = $_SESSION['user'];
 $currentUserRole = $currentUser['role'];
 $currentUserId = $currentUser['id'];
 
-// Load data based on user role
+
 if ($currentUserRole === 'teacher') {
     $users = $dashboardModel->getAllUsers();
     $allGrades = $dashboardModel->getAllGradesWithDetails();
     $subjects = $dashboardModel->getAllSubjects();
 } else {
-    // Student view
+
     $studentGrades = $dashboardModel->getStudentGrades($currentUserId);
 }
 ?>
