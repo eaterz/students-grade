@@ -80,6 +80,10 @@ INSERT INTO grades (user_id, subject_id, grade) VALUES
     (16, 4, 6); -- Evelyn Thomas - History
 
 
+-- insert in user table profile image column
+
+ALTER TABLE user
+    ADD profile_image VARCHAR(255) NULL;
 
 
 
