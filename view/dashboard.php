@@ -45,10 +45,10 @@ if ($currentUserRole === 'teacher') {
                                     <div class="flex rounded-md shadow-sm">
                                         <label for="subjectFilter" class="sr-only">Filter by Subject</label>
                                         <div class="relative flex-grow focus-within:z-10">
-                                            <select id="subjectFilter" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                            <select id="subjectFilter" class="block w-full rounded-md bg-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black">
                                                 <option value="all">All Subjects</option>
                                                 <?php foreach ($subjects as $subject): ?>
-                                                    <option value="<?php echo $subject['id']; ?>"><?php echo $subject['subject_name']; ?></option>
+                                                    <option value="<?php echo $subject['id']; ?>" class="text-black"><?php echo $subject['subject_name']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>

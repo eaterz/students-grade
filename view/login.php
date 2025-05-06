@@ -98,6 +98,8 @@
 
 <?php include './components/footer.php'; ?>
 
+
+
 <script>
     const personalCodeInput = document.getElementById('personal_code');
 

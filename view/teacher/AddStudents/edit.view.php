@@ -32,29 +32,29 @@ $student = $students->getUserById($_GET['id']);
 
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                         <div>
-                            <label for="personal_code" class="block text-sm font-medium text-gray-700">Personal Code</label>
+                            <label for="personal_code" class="block text-sm  font-medium text-gray-700">Personal Code</label>
                             <input type="text" name="personal_code" id="personal_code"
                                    value="<?php echo htmlspecialchars($student['personal_code'] ?? ''); ?>"
-                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm bg-gray-100 rounded-md">
                         </div>
 
                         <div>
                             <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
                             <input type="text" name="first_name" id="first_name"
                                    value="<?php echo htmlspecialchars($student['first_name'] ?? ''); ?>"
-                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm bg-gray-100 rounded-md">
                         </div>
 
                         <div>
                             <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
                             <input type="text" name="last_name" id="last_name"
                                    value="<?php echo htmlspecialchars($student['last_name'] ?? ''); ?>"
-                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm bg-gray-100 rounded-md">
                         </div>
                     </div>
 
                     <div class="mt-6 flex justify-end">
-                        <a href="/students" class="mr-3 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        <a href="/students" class="mr-3 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-gray-50">
                             Cancel
                         </a>
                         <button type="submit" class="px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
