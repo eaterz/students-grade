@@ -5,18 +5,15 @@
 <?php
 $dashboardModel = new DashboardModel();
 
-
 $currentUser = $_SESSION['user'];
 $currentUserRole = $currentUser['role'];
 $currentUserId = $currentUser['id'];
-
 
 if ($currentUserRole === 'teacher') {
     $users = $dashboardModel->getAllUsers();
     $allGrades = $dashboardModel->getAllGradesWithDetails();
     $subjects = $dashboardModel->getAllSubjects();
 } else {
-
     $studentGrades = $dashboardModel->getStudentGrades($currentUserId);
 }
 ?>
@@ -40,18 +37,32 @@ if ($currentUserRole === 'teacher') {
                             <div class="flex items-center justify-between flex-wrap sm:flex-nowrap">
                                 <h2 class="text-xl font-bold text-gray-800">Student Grades Overview</h2>
 
-                                <!-- Subject Filter -->
-                                <div class="mt-3 sm:mt-0">
-                                    <div class="flex rounded-md shadow-sm">
-                                        <label for="subjectFilter" class="sr-only">Filter by Subject</label>
-                                        <div class="relative flex-grow focus-within:z-10">
-                                            <select id="subjectFilter" class="block w-full rounded-md bg-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black">
-                                                <option value="all">All Subjects</option>
-                                                <?php foreach ($subjects as $subject): ?>
-                                                    <option value="<?php echo $subject['id']; ?>" class="text-black"><?php echo $subject['subject_name']; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
+                                <!-- Filters Area -->
+                                <div class="mt-3 sm:mt-0 flex space-x-3">
+                                    <!-- Name Filter -->
+                                    <div class="relative flex-grow focus-within:z-10">
+                                        <input type="text" id="nameFilter" placeholder="Filter by name..."
+                                               class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black">
+                                    </div>
+
+                                    <!-- Subject Filter -->
+                                    <div class="relative flex-grow focus-within:z-10">
+                                        <select id="subjectFilter" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black">
+                                            <option value="all">All Subjects</option>
+                                            <?php foreach ($subjects as $subject): ?>
+                                                <option value="<?php echo $subject['id']; ?>" class="text-black"><?php echo $subject['subject_name']; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+
+                                    <!-- Sort Order Dropdown -->
+                                    <div class="relative flex-grow focus-within:z-10">
+                                        <select id="sortOrder" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black">
+                                            <option value="name_asc">Name (A-Z)</option>
+                                            <option value="name_desc">Name (Z-A)</option>
+                                            <option value="grade_asc">Grade (Low-High)</option>
+                                            <option value="grade_desc">Grade (High-Low)</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -68,10 +79,13 @@ if ($currentUserRole === 'teacher') {
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                                 </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
+                                <tbody class="bg-white divide-y divide-gray-200" id="gradesTableBody">
                                 <?php if (!empty($allGrades)): ?>
                                     <?php foreach ($allGrades as $grade): ?>
-                                        <tr class="subject-row hover:bg-gray-50" data-subject="<?php echo $grade['subject_id']; ?>">
+                                        <tr class="grade-row hover:bg-gray-50"
+                                            data-subject="<?php echo $grade['subject_id']; ?>"
+                                            data-student-name="<?php echo strtolower($grade['first_name'] . ' ' . $grade['last_name']); ?>"
+                                            data-grade="<?php echo $grade['grade']; ?>">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?php echo $grade['first_name'] . ' ' . $grade['last_name']; ?></td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo $grade['subject_name']; ?></td>
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -89,7 +103,7 @@ if ($currentUserRole === 'teacher') {
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <tr>
+                                    <tr id="noGradesRow">
                                         <td colspan="4" class="px-6 py-16 text-center">
                                             <div class="flex flex-col items-center">
                                                 <svg class="h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -108,7 +122,7 @@ if ($currentUserRole === 'teacher') {
                 </div>
 
             <?php else: ?>
-                <!-- Student View -->
+                <!-- Student View - unchanged -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Main Grade Cards -->
                     <div class="lg:col-span-2">
@@ -230,23 +244,90 @@ if ($currentUserRole === 'teacher') {
         </div>
     </div>
 
-    <!-- JavaScript for Subject Filtering -->
+    <!-- JavaScript for Filtering and Sorting -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const nameFilter = document.getElementById('nameFilter');
             const subjectFilter = document.getElementById('subjectFilter');
-            if (subjectFilter) {
-                subjectFilter.addEventListener('change', function() {
-                    const selectedSubject = this.value;
-                    const rows = document.querySelectorAll('.subject-row');
+            const sortOrder = document.getElementById('sortOrder');
+            const rows = document.querySelectorAll('.grade-row');
+            const noGradesRow = document.getElementById('noGradesRow');
 
-                    rows.forEach(row => {
-                        if (selectedSubject === 'all' || row.dataset.subject === selectedSubject) {
-                            row.style.display = '';
-                        } else {
-                            row.style.display = 'none';
-                        }
-                    });
+
+            function applyFilters() {
+                const nameValue = nameFilter ? nameFilter.value.toLowerCase() : '';
+                const subjectValue = subjectFilter ? subjectFilter.value : 'all';
+                const sortValue = sortOrder ? sortOrder.value : 'name_asc';
+
+
+                let visibleRows = [];
+
+
+                rows.forEach(row => {
+                    const studentName = row.dataset.studentName;
+                    const subjectId = row.dataset.subject;
+
+
+                    const nameMatch = studentName.includes(nameValue);
+                    const subjectMatch = subjectValue === 'all' || subjectId === subjectValue;
+
+
+                    if (nameMatch && subjectMatch) {
+                        row.style.display = '';
+                        visibleRows.push(row);
+                    } else {
+                        row.style.display = 'none';
+                    }
                 });
+
+
+                if (visibleRows.length === 0 && noGradesRow) {
+                    noGradesRow.style.display = '';
+                } else if (noGradesRow) {
+                    noGradesRow.style.display = 'none';
+                }
+
+
+                sortRows(visibleRows, sortValue);
+            }
+
+
+            function sortRows(rows, sortType) {
+                const tbody = document.getElementById('gradesTableBody');
+
+
+                rows.sort((a, b) => {
+                    switch(sortType) {
+                        case 'name_asc':
+                            return a.dataset.studentName.localeCompare(b.dataset.studentName);
+                        case 'name_desc':
+                            return b.dataset.studentName.localeCompare(a.dataset.studentName);
+                        case 'grade_asc':
+                            return parseFloat(a.dataset.grade) - parseFloat(b.dataset.grade);
+                        case 'grade_desc':
+                            return parseFloat(b.dataset.grade) - parseFloat(a.dataset.grade);
+                        default:
+                            return 0;
+                    }
+                });
+
+
+                rows.forEach(row => {
+                    tbody.appendChild(row);
+                });
+            }
+
+
+            if (nameFilter) {
+                nameFilter.addEventListener('input', applyFilters);
+            }
+
+            if (subjectFilter) {
+                subjectFilter.addEventListener('change', applyFilters);
+            }
+
+            if (sortOrder) {
+                sortOrder.addEventListener('change', applyFilters);
             }
         });
     </script>
