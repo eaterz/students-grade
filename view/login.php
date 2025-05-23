@@ -33,7 +33,7 @@
                                 </svg>
                             </div>
                             <input type="text" id="personal_code" name="personal_code" placeholder="e.g. 123456-12345" maxlength="12" required
-                                   class="pl-10 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm shadow-sm bg-white text-black placeholder-black"
+                                   class="pl-10 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm shadow-sm bg-white text-black placeholder-grey"
                             />
                         </div>
                         <p class="mt-1 text-xs text-white">Format: 6 digits, dash, 5 digits</p>
@@ -51,7 +51,7 @@
                                 </svg>
                             </div>
                             <input type="password" id="password" name="password" placeholder="••••••••" required
-                                   class="pl-10 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm shadow-sm bg-white placeholder-black" 
+                                   class="pl-10 block w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm shadow-sm bg-white placeholder-grey"
                             />
                         </div>
                     </div>
