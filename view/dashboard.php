@@ -1,8 +1,10 @@
-<?php include './components/head.php';?>
-<?php include './components/navbar.php';?>
-<?php include './Models/DashboardModel.php';?>
-
 <?php
+
+include './components/head.php';
+include './components/navbar.php';
+include './Models/DashboardModel.php';
+
+// Initialize model and get user data
 $dashboardModel = new DashboardModel();
 
 $currentUser = $_SESSION['user'];
@@ -85,19 +87,25 @@ if ($currentUserRole === 'teacher') {
                                         <tr class="grade-row hover:bg-gray-50"
                                             data-subject="<?php echo $grade['subject_id']; ?>"
                                             data-student-name="<?php echo strtolower($grade['first_name'] . ' ' . $grade['last_name']); ?>"
-                                            data-grade="<?php echo $grade['grade']; ?>">
+                                            data-grade="<?php echo $grade['grade']; ?>"
+                                            data-grade-id="<?php echo $grade['id']; ?>">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?php echo $grade['first_name'] . ' ' . $grade['last_name']; ?></td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo $grade['subject_name']; ?></td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                                <?php
-                                                if ($grade['grade'] >= 9) echo 'bg-green-100 text-green-800';
-                                                elseif ($grade['grade'] >= 7) echo 'bg-blue-100 text-blue-800';
-                                                elseif ($grade['grade'] >= 5) echo 'bg-yellow-100 text-yellow-800';
-                                                else echo 'bg-red-100 text-red-800';
-                                                ?>">
-                                                    <?php echo $grade['grade']; ?>
-                                                </span>
+                                            <td class="px-6 py-4 whitespace-nowrap flex items-center">
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mr-2
+                                                    <?php
+                                                    if ($grade['grade'] >= 9) echo 'bg-green-100 text-green-800';
+                                                    elseif ($grade['grade'] >= 7) echo 'bg-blue-100 text-blue-800';
+                                                    elseif ($grade['grade'] >= 5) echo 'bg-yellow-100 text-yellow-800';
+                                                    else echo 'bg-red-100 text-red-800';
+                                                    ?>">
+                                                        <?php echo $grade['grade']; ?>
+                                                    </span>
+                                                <a href="/grades/edit?id=<?php echo $grade['id']; ?>" class="text-indigo-600 hover:text-indigo-900">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                    </svg>
+                                                </a>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo date('M d, Y', strtotime($grade['date'])); ?></td>
                                         </tr>
@@ -135,7 +143,7 @@ if ($currentUserRole === 'teacher') {
                                 <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <?php foreach ($studentGrades as $grade): ?>
                                         <div class="bg-gray-50 rounded-lg p-4 border-l-4 shadow-sm
-                                    <?php
+                                <?php
                                         if ($grade['grade'] >= 9) echo 'border-green-500';
                                         elseif ($grade['grade'] >= 7) echo 'border-blue-500';
                                         elseif ($grade['grade'] >= 5) echo 'border-yellow-500';
@@ -145,14 +153,14 @@ if ($currentUserRole === 'teacher') {
                                             <div class="flex justify-between items-center mt-3">
                                                 <span class="text-gray-600">Grade:</span>
                                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
-                                            <?php
+                                        <?php
                                                 if ($grade['grade'] >= 9) echo 'bg-green-100 text-green-800';
                                                 elseif ($grade['grade'] >= 7) echo 'bg-blue-100 text-blue-800';
                                                 elseif ($grade['grade'] >= 5) echo 'bg-yellow-100 text-yellow-800';
                                                 else echo 'bg-red-100 text-red-800';
                                                 ?>">
-                                                <?php echo $grade['grade']; ?>
-                                            </span>
+                                            <?php echo $grade['grade']; ?>
+                                        </span>
                                             </div>
                                             <div class="text-gray-500 text-sm mt-2">
                                                 Date: <?php echo date('M d, Y', strtotime($grade['date'])); ?>
@@ -195,7 +203,7 @@ if ($currentUserRole === 'teacher') {
                                         <p class="text-sm font-medium text-gray-600">Grade Average</p>
                                         <div class="mt-1 flex justify-center">
                                             <div class="text-5xl font-bold
-                                        <?php
+                                    <?php
                                             if ($averageGrade >= 9) echo 'text-green-600';
                                             elseif ($averageGrade >= 7) echo 'text-blue-600';
                                             elseif ($averageGrade >= 5) echo 'text-yellow-600';
@@ -220,19 +228,19 @@ if ($currentUserRole === 'teacher') {
                                         <div class="flex justify-between items-center mb-2">
                                             <span class="text-sm font-medium text-gray-600">Performance</span>
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                        <?php
+                                    <?php
                                             if ($averageGrade >= 9) echo 'bg-green-100 text-green-800';
                                             elseif ($averageGrade >= 7) echo 'bg-blue-100 text-blue-800';
                                             elseif ($averageGrade >= 5) echo 'bg-yellow-100 text-yellow-800';
                                             else echo 'bg-red-100 text-red-800';
                                             ?>">
-                                            <?php
-                                            if ($averageGrade >= 9) echo 'Excellent';
-                                            elseif ($averageGrade >= 7) echo 'Good';
-                                            elseif ($averageGrade >= 5) echo 'Average';
-                                            else echo 'Needs Improvement';
-                                            ?>
-                                        </span>
+                                        <?php
+                                        if ($averageGrade >= 9) echo 'Excellent';
+                                        elseif ($averageGrade >= 7) echo 'Good';
+                                        elseif ($averageGrade >= 5) echo 'Average';
+                                        else echo 'Needs Improvement';
+                                        ?>
+                                    </span>
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +252,8 @@ if ($currentUserRole === 'teacher') {
         </div>
     </div>
 
-    <!-- JavaScript for Filtering and Sorting -->
+    <!-- Include filter & sort JavaScript for teacher view -->
+<?php if ($currentUserRole === 'teacher'): ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const nameFilter = document.getElementById('nameFilter');
@@ -253,24 +262,19 @@ if ($currentUserRole === 'teacher') {
             const rows = document.querySelectorAll('.grade-row');
             const noGradesRow = document.getElementById('noGradesRow');
 
-
             function applyFilters() {
                 const nameValue = nameFilter ? nameFilter.value.toLowerCase() : '';
                 const subjectValue = subjectFilter ? subjectFilter.value : 'all';
                 const sortValue = sortOrder ? sortOrder.value : 'name_asc';
 
-
                 let visibleRows = [];
-
 
                 rows.forEach(row => {
                     const studentName = row.dataset.studentName;
                     const subjectId = row.dataset.subject;
 
-
                     const nameMatch = studentName.includes(nameValue);
                     const subjectMatch = subjectValue === 'all' || subjectId === subjectValue;
-
 
                     if (nameMatch && subjectMatch) {
                         row.style.display = '';
@@ -280,21 +284,17 @@ if ($currentUserRole === 'teacher') {
                     }
                 });
 
-
                 if (visibleRows.length === 0 && noGradesRow) {
                     noGradesRow.style.display = '';
                 } else if (noGradesRow) {
                     noGradesRow.style.display = 'none';
                 }
 
-
                 sortRows(visibleRows, sortValue);
             }
 
-
             function sortRows(rows, sortType) {
                 const tbody = document.getElementById('gradesTableBody');
-
 
                 rows.sort((a, b) => {
                     switch(sortType) {
@@ -311,12 +311,10 @@ if ($currentUserRole === 'teacher') {
                     }
                 });
 
-
                 rows.forEach(row => {
                     tbody.appendChild(row);
                 });
             }
-
 
             if (nameFilter) {
                 nameFilter.addEventListener('input', applyFilters);
@@ -331,5 +329,8 @@ if ($currentUserRole === 'teacher') {
             }
         });
     </script>
+<?php endif; ?>
 
-<?php include './components/footer.php';?>
+
+
+<?php include './components/footer.php'; ?>

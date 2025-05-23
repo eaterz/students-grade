@@ -20,6 +20,7 @@ $router->get('/logout', [AuthController::class, 'logout']);
 
 $router->get('/dashboard', [DashboardController::class, 'dashboard']);
 
+
 // Add student routes
 $router->get('/students', [AddStudentsController::class, 'index']);
 $router->get('/students/create', [AddStudentsController::class, 'create']);
@@ -31,6 +32,9 @@ $router->post('/students/delete', [AddStudentsController::class, 'destroy']);
 //Add Grades
 $router->get('/grades', [AddGradesController::class, 'create']);
 $router->post('/grades/add', [AddGradesController::class, 'store']);
+$router->get('/grades/edit', [AddGradesController::class, 'edit']);
+$router->post('/grades/update', [AddGradesController::class, 'update']);
+$router->post('/grades/delete', [AddGradesController::class, 'delete']);
 
 //Profile
 $router->get('/profile', [ProfileController::class, 'index']);
