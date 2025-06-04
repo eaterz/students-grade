@@ -2,7 +2,6 @@
 
 include './components/head.php';
 include './components/navbar.php';
-include './Models/DashboardModel.php';
 
 // Initialize model and get user data
 $dashboardModel = new DashboardModel();
@@ -130,7 +129,7 @@ if ($currentUserRole === 'teacher') {
                 </div>
 
             <?php else: ?>
-                <!-- Student View - unchanged -->
+                <!-- Student View -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Main Grade Cards -->
                     <div class="lg:col-span-2">
@@ -248,11 +247,68 @@ if ($currentUserRole === 'teacher') {
                         <?php endif; ?>
                     </div>
                 </div>
+
+                <!-- Student Grades Export -->
+                <?php if (!empty($studentGrades)): ?>
+                    <div class="mt-8">
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                            <div class="px-6 py-5 border-b border-gray-200 bg-gray-50">
+                                <div class="flex items-center">
+                                    <svg class="h-6 w-6 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <h3 class="text-lg font-bold text-gray-800">Export Your Grades</h3>
+                                </div>
+                            </div>
+
+                            <form action="/grades/export" method="POST" class="p-6">
+                                <!-- Hidden input to include all student grades -->
+                                <input type="hidden" name="student_id" value="<?php echo $currentUserId; ?>">
+
+                                <div class="mb-6">
+                                    <p class="text-gray-600 mb-4">Download a PDF file containing all your grades and academic summary.</p>
+                                    <div class="bg-gray-50 rounded-lg p-4">
+                                        <div class="grid grid-cols-2 gap-4 text-sm">
+                                            <div>
+                                                <span class="font-medium text-gray-700">Total Subjects:</span>
+                                                <span class="text-gray-900"><?php echo count($studentGrades); ?></span>
+                                            </div>
+                                            <div>
+                                                <span class="font-medium text-gray-700">Average Grade:</span>
+                                                <span class="font-bold
+                                                <?php
+                                                if ($averageGrade >= 9) echo 'text-green-600';
+                                                elseif ($averageGrade >= 7) echo 'text-blue-600';
+                                                elseif ($averageGrade >= 5) echo 'text-yellow-600';
+                                                else echo 'text-red-600';
+                                                ?>">
+                                                <?php echo $averageGrade; ?>
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex justify-end">
+                                    <button
+                                            type="submit"
+                                            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        Export Grades to PDF
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>
 
-    <!-- Include filter & sort JavaScript for teacher view -->
+
 <?php if ($currentUserRole === 'teacher'): ?>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
