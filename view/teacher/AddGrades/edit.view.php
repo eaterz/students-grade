@@ -47,7 +47,7 @@ if (!$grade) {
                 <form id="updateGradeForm" action="/grades/update" method="POST">
                     <div class="mb-6">
                         <label for="grade" class="block text-sm font-medium text-gray-700">Grade:</label>
-                        <input type="number" id="grade" name="grade" min="0" max="10" step="0.1"
+                        <input type="number" id="grade" name="grade" min="1" max="10" step="0.1"
                                value="<?php echo htmlspecialchars($grade['grade']); ?>"
                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-black" required>
                         <p class="mt-1 text-xs text-gray-500">Enter a value between 0 and 10</p>

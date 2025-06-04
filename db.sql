@@ -78,6 +78,7 @@ INSERT INTO grades (user_id, subject_id, grade) VALUES
     (14, 2, 10),-- Charlotte Wilson - Science
     (15, 3, 7), -- Amelia Anderson - English
     (16, 4, 6); -- Evelyn Thomas - History
+    
 
 
 -- insert in user table profile image column
