@@ -54,7 +54,7 @@ $student = $students->getUserById($_GET['id']);
                     </div>
 
                     <div class="mt-6 flex justify-end">
-                        <a href="/students" class="mr-3 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-gray-50">
+                        <a href="/students" class="mr-3 px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-white bg-red-600 ">
                             Cancel
                         </a>
                         <button type="submit" class="px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
