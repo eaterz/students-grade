@@ -7,6 +7,7 @@ require "Controller/AddStudentsController.php";
 require "Controller/AddGradesController.php";
 require "Controller/AddSubjectController.php";
 require "Controller/ProfileController.php";
+require "Controller/ExportGradesController.php";
 require "Router.php";
 
 $router = new Router();
@@ -35,6 +36,8 @@ $router->post('/grades/add', [AddGradesController::class, 'store']);
 $router->get('/grades/edit', [AddGradesController::class, 'edit']);
 $router->post('/grades/update', [AddGradesController::class, 'update']);
 $router->post('/grades/delete', [AddGradesController::class, 'delete']);
+$router->post('/grades/export', [ExportGradesController::class, 'generateReport']);
+
 
 //Profile
 $router->get('/profile', [ProfileController::class, 'index']);
